@@ -1,0 +1,14 @@
+{
+    "extends": ["//"],
+    "tasks": {
+        "strip-comments": {
+            "inputs": ["src/**/*.js"],
+            "outputs": ["build/stripped-comments/**"]
+        },
+        "build": {
+            "dependsOn": ["strip-comments"],
+            "inputs": ["build/stripped-comments/**"],
+            "outputs": ["dist/**"]
+        }
+    }
+}
