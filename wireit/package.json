@@ -1,0 +1,19 @@
+{
+  "name": "wireit",
+  "private": true,
+  "scripts": {
+    "build": "wireit"
+  },
+  "devDependencies": {
+    "wireit": "^0.14.12"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "wireit": {
+    "build": {
+      "dependencies": ["./packages/sample:build"]
+    }
+  }
+}

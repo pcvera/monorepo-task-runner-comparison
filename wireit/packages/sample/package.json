@@ -1,0 +1,24 @@
+{
+  "name": "@repo/sample",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "wireit"
+  },
+  "dependencies": {
+    "strip-comments": "^2.0.1"
+  },
+  "wireit": {
+    "strip-comments": {
+      "command": "node scripts/strip-comments.cjs",
+      "files": ["src/**/*.js"],
+      "output": ["build/stripped-comments/**"]
+    },
+    "build": {
+      "command": "node scripts/dummy-build.cjs",
+      "dependencies": ["strip-comments"],
+      "files": ["build/stripped-comments/**", "src/build-only.json"],
+      "output": ["dist/**"]
+    }
+  }
+}
