@@ -2,7 +2,9 @@
   "name": "@org/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx build sample"
+  },
   "private": true,
   "dependencies": {},
   "devDependencies": {
