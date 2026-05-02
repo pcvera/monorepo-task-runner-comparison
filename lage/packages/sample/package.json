@@ -1,0 +1,12 @@
+{
+  "name": "@repo/sample",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "strip-comments": "node scripts/strip-comments.cjs",
+    "build": "node scripts/dummy-build.cjs"
+  },
+  "dependencies": {
+    "strip-comments": "^2.0.1"
+  }
+}

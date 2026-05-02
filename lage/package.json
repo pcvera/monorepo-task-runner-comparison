@@ -1,0 +1,14 @@
+{
+  "name": "lage",
+  "private": true,
+  "scripts": {
+    "build": "lage build"
+  },
+  "devDependencies": {
+    "lage": "^2.15.12"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  }
+}
