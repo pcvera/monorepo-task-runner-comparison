@@ -1,0 +1,14 @@
+{
+  "name": "moon",
+  "private": true,
+  "scripts": {
+    "build": "moon run :build"
+  },
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@moonrepo/cli": "^2.2.3"
+  }
+}

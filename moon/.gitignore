@@ -1,0 +1,10 @@
+# moon
+.moon/cache
+.moon/docker
+
+# Dependencies
+node_modules
+
+# Build outputs (sample package)
+build
+dist

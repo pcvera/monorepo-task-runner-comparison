@@ -1,0 +1,24 @@
+language: "javascript"
+layer: "library"
+
+tasks:
+  strip-comments:
+    command: node
+    args:
+      - scripts/strip-comments.cjs
+    inputs:
+      - "src/**/*.js"
+    outputs:
+      - "build/stripped-comments"
+
+  build:
+    command: node
+    args:
+      - scripts/dummy-build.cjs
+    deps:
+      - "~:strip-comments"
+    inputs:
+      - "build/stripped-comments/**"
+      - "src/build-only.json"
+    outputs:
+      - "dist"
