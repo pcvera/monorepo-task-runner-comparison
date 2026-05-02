@@ -1,14 +1,10 @@
 {
-    "extends": ["//"],
-    "tasks": {
-        "strip-comments": {
-            "inputs": ["src/**/*.js"],
-            "outputs": ["build/stripped-comments/**"]
-        },
-        "build": {
-            "dependsOn": ["strip-comments"],
-            "inputs": ["build/stripped-comments/**", "src/build-only.json"],
-            "outputs": ["dist/**"]
-        }
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.json", "scripts/**/*.cjs", "../stripped/build/stripped-comments/**"],
+      "outputs": ["dist/**"]
     }
+  }
 }
