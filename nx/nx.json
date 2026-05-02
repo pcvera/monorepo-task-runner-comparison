@@ -5,8 +5,10 @@
     "production": ["default"],
     "sharedGlobals": [],
     "stripCommentsSources": ["{projectRoot}/src/**/*.js"],
-    "strippedCommentsForBuild": ["{projectRoot}/build/stripped-comments/**"],
-    "buildOnlySources": ["{projectRoot}/src/build-only.json"]
+    "buildOnlySources": ["{projectRoot}/src/build-only.json"],
+    "upstreamStrippedOutput": [
+      "{workspaceRoot}/packages/stripped/build/stripped-comments/**"
+    ]
   },
   "neverConnectToCloud": true,
   "analytics": false,
@@ -14,9 +16,6 @@
     "enabled": false
   },
   "targetDefaults": {
-    "strip-comments": {
-      "cache": true
-    },
     "build": {
       "cache": true
     }

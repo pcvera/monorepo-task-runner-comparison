@@ -4,23 +4,18 @@
   "projectType": "library",
   "sourceRoot": "packages/sample/src",
   "targets": {
-    "strip-comments": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "node scripts/strip-comments.cjs",
-        "cwd": "{projectRoot}"
-      },
-      "inputs": ["stripCommentsSources"],
-      "outputs": ["{projectRoot}/build/stripped-comments"]
-    },
     "build": {
       "executor": "nx:run-commands",
-      "dependsOn": ["strip-comments"],
+      "dependsOn": ["^build"],
       "options": {
         "command": "node scripts/dummy-build.cjs",
         "cwd": "{projectRoot}"
       },
-      "inputs": ["strippedCommentsForBuild", "buildOnlySources"],
+      "inputs": [
+        "upstreamStrippedOutput",
+        "buildOnlySources",
+        "{projectRoot}/scripts/**/*.cjs"
+      ],
       "outputs": ["{projectRoot}/dist"]
     }
   },

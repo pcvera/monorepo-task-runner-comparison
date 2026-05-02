@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "nx build sample"
+    "build": "nx run-many -t build --projects=stripped,sample"
   },
   "private": true,
   "dependencies": {},

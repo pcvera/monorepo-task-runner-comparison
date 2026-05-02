@@ -20,6 +20,16 @@ importers:
 
   packages/sample:
     dependencies:
+      '@repo/stripped':
+        specifier: workspace:*
+        version: link:../stripped
+    devDependencies:
+      vite-plus:
+        specifier: 'catalog:'
+        version: 0.1.20(@types/node@25.6.0)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(jiti@2.6.1)(yaml@2.8.4))(yaml@2.8.4)
+
+  packages/stripped:
+    dependencies:
       strip-comments:
         specifier: ^2.0.1
         version: 2.0.1

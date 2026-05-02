@@ -3,14 +3,18 @@
 const config = {
   npmClient: "pnpm",
   pipeline: {
-    "strip-comments": {
+    "@repo/stripped#build": {
       dependsOn: [],
-      inputs: ["src/**/*.js"],
+      inputs: ["src/**/*.js", "scripts/**/*.cjs"],
       outputs: ["build/stripped-comments/**"],
     },
-    build: {
-      dependsOn: ["strip-comments"],
-      inputs: ["build/stripped-comments/**", "src/build-only.json"],
+    "@repo/sample#build": {
+      dependsOn: ["@repo/stripped#build"],
+      inputs: [
+        "src/**/*.json",
+        "scripts/**/*.cjs",
+        "../stripped/build/stripped-comments/**",
+      ],
       outputs: ["dist/**"],
     },
   },

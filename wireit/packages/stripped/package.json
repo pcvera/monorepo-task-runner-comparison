@@ -1,0 +1,23 @@
+{
+  "name": "@repo/stripped",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "wireit"
+  },
+  "dependencies": {
+    "strip-comments": "^2.0.1"
+  },
+  "exports": {
+    "./stripped-comments/*": "./build/stripped-comments/*",
+    "./package.json": "./package.json"
+  },
+  "files": ["build"],
+  "wireit": {
+    "build": {
+      "command": "node scripts/strip-comments.cjs",
+      "files": ["src/**/*.js", "scripts/**/*.cjs"],
+      "output": ["build/stripped-comments/**"]
+    }
+  }
+}

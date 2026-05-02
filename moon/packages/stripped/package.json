@@ -1,0 +1,16 @@
+{
+  "name": "@repo/stripped",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/strip-comments.cjs"
+  },
+  "dependencies": {
+    "strip-comments": "^2.0.1"
+  },
+  "exports": {
+    "./stripped-comments/*": "./build/stripped-comments/*",
+    "./package.json": "./package.json"
+  },
+  "files": ["build"]
+}

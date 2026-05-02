@@ -1,0 +1,18 @@
+{
+  "name": "stripped",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/stripped/src",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node scripts/strip-comments.cjs",
+        "cwd": "{projectRoot}"
+      },
+      "inputs": ["stripCommentsSources", "{projectRoot}/scripts/**/*.cjs"],
+      "outputs": ["{projectRoot}/build/stripped-comments"]
+    }
+  },
+  "tags": []
+}

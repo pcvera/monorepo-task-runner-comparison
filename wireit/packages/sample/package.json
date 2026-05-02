@@ -6,18 +6,17 @@
     "build": "wireit"
   },
   "dependencies": {
-    "strip-comments": "^2.0.1"
+    "@repo/stripped": "workspace:*"
   },
   "wireit": {
-    "strip-comments": {
-      "command": "node scripts/strip-comments.cjs",
-      "files": ["src/**/*.js"],
-      "output": ["build/stripped-comments/**"]
-    },
     "build": {
       "command": "node scripts/dummy-build.cjs",
-      "dependencies": ["strip-comments"],
-      "files": ["build/stripped-comments/**", "src/build-only.json"],
+      "dependencies": ["../stripped:build"],
+      "files": [
+        "src/**/*.json",
+        "scripts/**/*.cjs",
+        "../stripped/build/stripped-comments/**"
+      ],
       "output": ["dist/**"]
     }
   }

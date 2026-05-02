@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "strip-comments": "^2.0.1"
+    "@repo/stripped": "workspace:*"
   },
   "devDependencies": {
     "vite-plus": "catalog:"

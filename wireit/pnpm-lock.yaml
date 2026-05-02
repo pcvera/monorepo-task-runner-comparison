@@ -14,9 +14,23 @@ importers:
 
   packages/sample:
     dependencies:
+      '@repo/stripped':
+        specifier: workspace:*
+        version: link:../stripped
+    devDependencies:
+      wireit:
+        specifier: ^0.14.12
+        version: 0.14.12
+
+  packages/stripped:
+    dependencies:
       strip-comments:
         specifier: ^2.0.1
         version: 2.0.1
+    devDependencies:
+      wireit:
+        specifier: ^0.14.12
+        version: 0.14.12
 
 packages:
 
