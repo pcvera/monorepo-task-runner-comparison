@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": ["default"],
+    "sharedGlobals": [],
+    "stripCommentsSources": ["{projectRoot}/src/**/*.js"],
+    "strippedCommentsForBuild": ["{projectRoot}/build/stripped-comments/**"]
+  },
+  "neverConnectToCloud": true,
+  "analytics": false,
+  "tui": {
+    "enabled": false
+  },
+  "targetDefaults": {
+    "strip-comments": {
+      "cache": true
+    },
+    "build": {
+      "cache": true
+    }
+  }
+}
