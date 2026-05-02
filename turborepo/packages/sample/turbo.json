@@ -7,7 +7,7 @@
         },
         "build": {
             "dependsOn": ["strip-comments"],
-            "inputs": ["build/stripped-comments/**"],
+            "inputs": ["build/stripped-comments/**", "src/build-only.json"],
             "outputs": ["dist/**"]
         }
     }

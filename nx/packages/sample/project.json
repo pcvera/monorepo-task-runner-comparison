@@ -20,7 +20,7 @@
         "command": "node scripts/dummy-build.cjs",
         "cwd": "{projectRoot}"
       },
-      "inputs": ["strippedCommentsForBuild"],
+      "inputs": ["strippedCommentsForBuild", "buildOnlySources"],
       "outputs": ["{projectRoot}/dist"]
     }
   },

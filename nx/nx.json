@@ -5,7 +5,8 @@
     "production": ["default"],
     "sharedGlobals": [],
     "stripCommentsSources": ["{projectRoot}/src/**/*.js"],
-    "strippedCommentsForBuild": ["{projectRoot}/build/stripped-comments/**"]
+    "strippedCommentsForBuild": ["{projectRoot}/build/stripped-comments/**"],
+    "buildOnlySources": ["{projectRoot}/src/build-only.json"]
   },
   "neverConnectToCloud": true,
   "analytics": false,
