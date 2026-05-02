@@ -1,0 +1,11 @@
+{
+  "name": "@repo/sample",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "strip-comments": "^2.0.1"
+  },
+  "devDependencies": {
+    "vite-plus": "catalog:"
+  }
+}
