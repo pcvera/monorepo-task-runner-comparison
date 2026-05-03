@@ -1,10 +1,9 @@
 # Examination of monorepo task runner caching behavior
 
-It's sort of hard to find the details for each monorepo task runner's caching behavior, so I decided it was time for me to build out a minimal example to test it out myself.
+It's sort of hard to find the details for each monorepo task runner's caching behavior, so I decided it was time for me to build out a minimal example to test it out myself. I explored as many of the "easy drop in at least it's not Bazel-level buy-in" task runners as I could find.
 
-This was inspired by my experience where, if I have one package produces `.d.ts` files, changing the source of that package in a way that doesn't change the type signatures shouldn't result in its dependant packages having to have it's TypeScript reevaluated.
+This was inspired by my experience where, if I have one package produces `.d.ts` files, changing the source of that package in a way that doesn't change the type signatures shouldn't result in its dependant packages having to have it's TypeScript reevaluated. Intuitively, the more stuff that triggers a downstream rebuild the more downstream rebuilds will be triggered and the less benefit you'll get from caching at all.
 
-I explored as many of the "easy drop in at least it's not Bazel-level buy-in" as I could find.
 
 # Methodology
 
@@ -15,7 +14,7 @@ My test is:
 0. Modify the source of the `sample` package and rebuild all packages (cache replay the unchanged dependant)
 0. Undo that modification and rebuild all packages (cache replay the previous builds)
 0. Modify the source of the `stripped` package in a way that doesn't change the output and rebuild all packages (cache replay the unchanged dependant)
-0. Modify the source of the `stripped` package in a way that **does** change the emitted JavaScript and rebuild all packages
+0. Modify the source of the `stripped` package in a way that **does** change the emitted JavaScript and rebuild all packages (correct full rebuild, mostly as a smoke test to make sure I'm not missing something obvious)
 
 Observing what is built and what is replayed from cache at each step.
 
@@ -25,6 +24,6 @@ Most of the task runners I tested rebuilt the `sample` package, even though the 
 
 | Test | lage | moon | nx | turborepo | vite-plus | wireit |
 |------|------|------|------|------|------|------|
-| Replay Unchanged Package |  |  |  |  |  |  |
-| Replay Previous Builds |  |  |  |  |  |  |
-| Cache Unchanged Dependant |  |  |  |  |  |  |
+| Replay Unchanged Package | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Replay N-1st Build | ✅ | ✅  | ✅ | ✅ | ❌ | ✅ |
+| Cache Unchanged Dependant | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ |
