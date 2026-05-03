@@ -10,11 +10,12 @@ This was inspired by my experience where, if I have one package produces `.d.ts`
 I created two sample packages: a `stripped` JavaScript package whose build is just a script that removes the comments from it's one source file, and a `sample` package that depends on it that has a build that copies the output of the `stripped` package and its own `src` directory to a `dist` directory. These are intended to be analogous to a something like building a library package, and then the build of an application package that depends on that library.
 
 My test is:
-0. Build all packages
-0. Modify the source of the `sample` package and rebuild all packages (cache replay the unchanged dependant)
-0. Undo that modification and rebuild all packages (cache replay the previous builds)
-0. Modify the source of the `stripped` package in a way that doesn't change the output and rebuild all packages (cache replay the unchanged dependant)
-0. Modify the source of the `stripped` package in a way that **does** change the emitted JavaScript and rebuild all packages (correct full rebuild, mostly as a smoke test to make sure I'm not missing something obvious)
+
+1. Build all packages
+1. Modify the source of the `sample` package and rebuild all packages (cache replay the unchanged dependant)
+1. Undo that modification and rebuild all packages (cache replay the previous builds)
+1. Modify the source of the `stripped` package in a way that doesn't change the output and rebuild all packages (cache replay the unchanged dependant)
+1. Modify the source of the `stripped` package in a way that **does** change the emitted JavaScript and rebuild all packages (correct full rebuild, mostly as a smoke test to make sure I'm not missing something obvious)
 
 Observing what is built and what is replayed from cache at each step.
 
