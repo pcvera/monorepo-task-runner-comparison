@@ -11,7 +11,11 @@
         "command": "node scripts/dummy-build.cjs",
         "cwd": "{projectRoot}"
       },
-      "inputs": ["buildOnlySources", "{projectRoot}/scripts/**/*.cjs"],
+      "inputs": [
+        "buildOnlySources",
+        "{projectRoot}/scripts/**/*.cjs",
+        { "dependentTasksOutputFiles": "**/*" }
+      ],
       "outputs": ["{projectRoot}/dist"]
     }
   },

@@ -1,0 +1,58 @@
+
+========================================================================
+Reset (pnpm run reset)
+========================================================================
+
+> wireit@ reset /Users/pcvera/dev/task-runner-comparison/wireit
+> rm -rf .wireit packages/stripped/.wireit packages/sample/.wireit node_modules/.wireit packages/stripped/node_modules/.wireit packages/sample/node_modules/.wireit packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist
+
+
+========================================================================
+Step A — Build all packages
+========================================================================
+
+> wireit@ build /Users/pcvera/dev/task-runner-comparison/wireit
+> wireit
+
+✅ Ran 2 scripts and skipped 0 in 0.1s.
+Analyzing
+
+========================================================================
+Step B — Modify sample package source, rebuild all
+========================================================================
+
+> wireit@ build /Users/pcvera/dev/task-runner-comparison/wireit
+> wireit
+
+✅ Ran 1 script and skipped 1 in 0.1s.
+Analyzing
+
+========================================================================
+Step C — Restore sample package, rebuild all
+========================================================================
+
+> wireit@ build /Users/pcvera/dev/task-runner-comparison/wireit
+> wireit
+
+✅ Ran 0 scripts and skipped 2 in 0s.
+Analyzing
+
+========================================================================
+Step D — Modify stripped package (comment-only; same emitted JS), rebuild all
+========================================================================
+
+> wireit@ build /Users/pcvera/dev/task-runner-comparison/wireit
+> wireit
+
+✅ Ran 2 scripts and skipped 0 in 0.1s.
+Analyzing
+
+========================================================================
+Step E — Modify stripped package (emitted JS changes), rebuild all
+========================================================================
+
+> wireit@ build /Users/pcvera/dev/task-runner-comparison/wireit
+> wireit
+
+✅ Ran 2 scripts and skipped 0 in 0.1s.
+Analyzing

@@ -1,0 +1,77 @@
+========================================================================
+Reset (pnpm run reset)
+========================================================================
+
+> vite-plus@ reset /Users/pcvera/dev/task-runner-comparison/vite-plus
+> pnpm exec vp cache clean && rm -rf node_modules/.vite packages/stripped/node_modules/.vite packages/sample/node_modules/.vite packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist
+
+
+========================================================================
+Step A — Build all packages
+========================================================================
+
+> vite-plus@ build /Users/pcvera/dev/task-runner-comparison/vite-plus
+> vp run -r build
+
+~/packages/stripped$ node scripts/strip-comments.cjs
+
+~/packages/sample$ node scripts/dummy-build.cjs
+
+---
+vp run: 0/2 cache hit (0%). (Run `vp run --last-details` for full details)
+
+========================================================================
+Step B — Modify sample package source, rebuild all
+========================================================================
+
+> vite-plus@ build /Users/pcvera/dev/task-runner-comparison/vite-plus
+> vp run -r build
+
+~/packages/stripped$ node scripts/strip-comments.cjs ◉ cache hit, replaying
+
+~/packages/sample$ node scripts/dummy-build.cjs ○ cache miss: 'packages/sample/src/build-only.json' modified, executing
+
+---
+vp run: 1/2 cache hit (50%), 23ms saved. (Run `vp run --last-details` for full details)
+
+========================================================================
+Step C — Restore sample package, rebuild all
+========================================================================
+
+> vite-plus@ build /Users/pcvera/dev/task-runner-comparison/vite-plus
+> vp run -r build
+
+~/packages/stripped$ node scripts/strip-comments.cjs ◉ cache hit, replaying
+
+~/packages/sample$ node scripts/dummy-build.cjs ○ cache miss: 'packages/sample/src/build-only.json' modified, executing
+
+---
+vp run: 1/2 cache hit (50%), 23ms saved. (Run `vp run --last-details` for full details)
+
+========================================================================
+Step D — Modify stripped package (comment-only; same emitted JS), rebuild all
+========================================================================
+
+> vite-plus@ build /Users/pcvera/dev/task-runner-comparison/vite-plus
+> vp run -r build
+
+~/packages/stripped$ node scripts/strip-comments.cjs ○ cache miss: 'packages/stripped/src/sample-input.js' modified, executing
+
+~/packages/sample$ node scripts/dummy-build.cjs ◉ cache hit, replaying
+
+---
+vp run: 1/2 cache hit (50%), 22ms saved. (Run `vp run --last-details` for full details)
+
+========================================================================
+Step E — Modify stripped package (emitted JS changes), rebuild all
+========================================================================
+
+> vite-plus@ build /Users/pcvera/dev/task-runner-comparison/vite-plus
+> vp run -r build
+
+~/packages/stripped$ node scripts/strip-comments.cjs ○ cache miss: 'packages/stripped/src/sample-input.js' modified, executing
+
+~/packages/sample$ node scripts/dummy-build.cjs ○ cache miss: 'packages/stripped/build/stripped-comments/sample-input.js' modified, executing
+
+---
+vp run: 0/2 cache hit (0%). (Run `vp run --last-details` for full details)

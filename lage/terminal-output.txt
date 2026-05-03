@@ -1,0 +1,122 @@
+
+========================================================================
+Reset (pnpm run reset)
+========================================================================
+
+> lage@ reset /Users/pcvera/dev/task-runner-comparison/lage
+> pnpm exec lage cache --clear && rm -rf node_modules/.cache/backfill packages/stripped/node_modules/.cache/backfill packages/sample/node_modules/.cache/backfill packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist
+
+Clearing Cache
+Cache Cleared
+
+========================================================================
+Step A — Build all packages
+========================================================================
+
+> lage@ build /Users/pcvera/dev/task-runner-comparison/lage
+> lage build
+
+@repo/stripped build … queued
+@repo/stripped build ➔ start
+@repo/stripped build ✓ done - 0.38s
+@repo/sample build … queued
+@repo/sample build ➔ start
+@repo/sample build ✓ done - 0.25s
+
+Summary
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+@repo/sample build success, took 0.25s, queued for 0.00s
+@repo/stripped build success, took 0.38s, queued for 0.00s
+success: 2, skipped: 0, pending: 0, aborted: 0, failed: 0
+worker restarts: 0, max worker memory usage: 24.53 MB
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Took a total of 0.64s to complete. 
+
+========================================================================
+Step B — Modify sample package source, rebuild all
+========================================================================
+
+> lage@ build /Users/pcvera/dev/task-runner-comparison/lage
+> lage build
+
+@repo/stripped build … queued
+@repo/stripped build ➔ start
+@repo/stripped build » skip - d6ec08b9575fab763935fc11ce81c54830914195
+@repo/sample build … queued
+@repo/sample build ➔ start
+@repo/sample build ✓ done - 0.25s
+
+Summary
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+@repo/sample build success, took 0.25s, queued for 0.00s
+success: 1, skipped: 1, pending: 0, aborted: 0, failed: 0
+worker restarts: 0, max worker memory usage: 24.04 MB
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Took a total of 0.38s to complete. 
+
+========================================================================
+Step C — Restore sample package, rebuild all
+========================================================================
+
+> lage@ build /Users/pcvera/dev/task-runner-comparison/lage
+> lage build
+
+@repo/stripped build … queued
+@repo/stripped build ➔ start
+@repo/stripped build » skip - d6ec08b9575fab763935fc11ce81c54830914195
+@repo/sample build … queued
+@repo/sample build ➔ start
+@repo/sample build » skip - 25c4ee0ba3ccb4ace7e2f984fe8c8ecfd57d9722
+
+Summary
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+success: 0, skipped: 2, pending: 0, aborted: 0, failed: 0
+worker restarts: 0, max worker memory usage: 23.09 MB
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Took a total of 0.14s to complete. All targets skipped!
+
+========================================================================
+Step D — Modify stripped package (comment-only; same emitted JS), rebuild all
+========================================================================
+
+> lage@ build /Users/pcvera/dev/task-runner-comparison/lage
+> lage build
+
+@repo/stripped build … queued
+@repo/stripped build ➔ start
+@repo/stripped build ✓ done - 0.38s
+@repo/sample build … queued
+@repo/sample build ➔ start
+@repo/sample build ✓ done - 0.24s
+
+Summary
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+@repo/sample build success, took 0.24s, queued for 0.00s
+@repo/stripped build success, took 0.38s, queued for 0.00s
+success: 2, skipped: 0, pending: 0, aborted: 0, failed: 0
+worker restarts: 0, max worker memory usage: 24.51 MB
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Took a total of 0.62s to complete. 
+
+========================================================================
+Step E — Modify stripped package (emitted JS changes), rebuild all
+========================================================================
+
+> lage@ build /Users/pcvera/dev/task-runner-comparison/lage
+> lage build
+
+@repo/stripped build … queued
+@repo/stripped build ➔ start
+@repo/stripped build ✓ done - 0.37s
+@repo/sample build … queued
+@repo/sample build ➔ start
+@repo/sample build ✓ done - 0.24s
+
+Summary
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+@repo/sample build success, took 0.24s, queued for 0.00s
+@repo/stripped build success, took 0.37s, queued for 0.00s
+success: 2, skipped: 0, pending: 0, aborted: 0, failed: 0
+worker restarts: 0, max worker memory usage: 24.51 MB
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Took a total of 0.62s to complete. 

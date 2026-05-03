@@ -1,0 +1,173 @@
+
+========================================================================
+Reset (pnpm run reset)
+========================================================================
+
+> @org/source@0.0.0 reset /Users/pcvera/dev/task-runner-comparison/nx
+> nx reset && rm -rf packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist
+
+
+ NX   Resetting the Nx cache and stopping the daemon.
+
+
+
+ NX   Successfully reset the Nx workspace.
+
+
+========================================================================
+Step A — Build all packages
+========================================================================
+
+> @org/source@0.0.0 build /Users/pcvera/dev/task-runner-comparison/nx
+> nx run-many -t build --projects=stripped,sample
+
+
+ NX   Running target build for 2 projects:
+
+- stripped
+- sample
+
+
+
+> nx run stripped:build
+
+> node scripts/strip-comments.cjs
+
+
+> nx run sample:build
+
+> node scripts/dummy-build.cjs
+
+
+
+
+ NX   Successfully ran target build for 2 projects
+
+
+
+========================================================================
+Step B — Modify sample package source, rebuild all
+========================================================================
+
+> @org/source@0.0.0 build /Users/pcvera/dev/task-runner-comparison/nx
+> nx run-many -t build --projects=stripped,sample
+
+
+ NX   Running target build for 2 projects:
+
+- stripped
+- sample
+
+
+
+> nx run stripped:build  [existing outputs match the cache, left as is]
+
+> node scripts/strip-comments.cjs
+
+
+> nx run sample:build
+
+> node scripts/dummy-build.cjs
+
+
+
+
+ NX   Successfully ran target build for 2 projects
+
+Nx read the output from the cache instead of running the command for 1 out of 2 tasks.
+
+
+========================================================================
+Step C — Restore sample package, rebuild all
+========================================================================
+
+> @org/source@0.0.0 build /Users/pcvera/dev/task-runner-comparison/nx
+> nx run-many -t build --projects=stripped,sample
+
+
+ NX   Running target build for 2 projects:
+
+- stripped
+- sample
+
+
+
+> nx run stripped:build  [existing outputs match the cache, left as is]
+
+> node scripts/strip-comments.cjs
+
+
+> nx run sample:build  [local cache]
+
+> node scripts/dummy-build.cjs
+
+
+
+
+ NX   Successfully ran target build for 2 projects
+
+Nx read the output from the cache instead of running the command for 2 out of 2 tasks.
+
+
+========================================================================
+Step D — Modify stripped package (comment-only; same emitted JS), rebuild all
+========================================================================
+
+> @org/source@0.0.0 build /Users/pcvera/dev/task-runner-comparison/nx
+> nx run-many -t build --projects=stripped,sample
+
+
+ NX   Running target build for 2 projects:
+
+- stripped
+- sample
+
+
+
+> nx run stripped:build
+
+> node scripts/strip-comments.cjs
+
+
+> nx run sample:build  [existing outputs match the cache, left as is]
+
+> node scripts/dummy-build.cjs
+
+
+
+
+ NX   Successfully ran target build for 2 projects
+
+Nx read the output from the cache instead of running the command for 1 out of 2 tasks.
+
+
+========================================================================
+Step E — Modify stripped package (emitted JS changes), rebuild all
+========================================================================
+
+> @org/source@0.0.0 build /Users/pcvera/dev/task-runner-comparison/nx
+> nx run-many -t build --projects=stripped,sample
+
+
+ NX   Running target build for 2 projects:
+
+- stripped
+- sample
+
+
+
+> nx run stripped:build
+
+> node scripts/strip-comments.cjs
+
+
+> nx run sample:build
+
+> node scripts/dummy-build.cjs
+
+
+
+
+ NX   Successfully ran target build for 2 projects
+
+

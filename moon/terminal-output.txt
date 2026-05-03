@@ -1,0 +1,89 @@
+
+========================================================================
+Reset (pnpm run reset)
+========================================================================
+
+> moon@ reset /Users/pcvera/dev/task-runner-comparison/moon
+> moon clean --all && rm -rf packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist
+
+
+│ SUCCESS
+│ Deleted 39 files and saved 20555 bytes
+
+
+========================================================================
+Step A — Build all packages
+========================================================================
+
+> moon@ build /Users/pcvera/dev/task-runner-comparison/moon
+> moon run :build
+
+▮▮▮▮ stripped:build (47e570d5)
+▮▮▮▮ stripped:build (26ms, 47e570d5)
+▮▮▮▮ sample:build (15db9277)
+▮▮▮▮ sample:build (24ms, 15db9277)
+
+Tasks: 2 completed
+ Time: 105ms
+
+
+========================================================================
+Step B — Modify sample package source, rebuild all
+========================================================================
+
+> moon@ build /Users/pcvera/dev/task-runner-comparison/moon
+> moon run :build
+
+▮▮▮▮ stripped:build (cached, 47e570d5)
+▮▮▮▮ sample:build (c21f421d)
+▮▮▮▮ sample:build (25ms, c21f421d)
+
+Tasks: 2 completed (1 cached)
+ Time: 67ms
+
+
+========================================================================
+Step C — Restore sample package, rebuild all
+========================================================================
+
+> moon@ build /Users/pcvera/dev/task-runner-comparison/moon
+> moon run :build
+
+▮▮▮▮ stripped:build (cached, 47e570d5)
+▮▮▮▮ sample:build (cached, 15db9277)
+
+Tasks: 2 completed (2 cached)
+ Time: 43ms ❯❯❯❯ to the moon
+
+
+========================================================================
+Step D — Modify stripped package (comment-only; same emitted JS), rebuild all
+========================================================================
+
+> moon@ build /Users/pcvera/dev/task-runner-comparison/moon
+> moon run :build
+
+▮▮▮▮ stripped:build (4d71e9b9)
+▮▮▮▮ stripped:build (26ms, 4d71e9b9)
+▮▮▮▮ sample:build (39f74ec1)
+▮▮▮▮ sample:build (24ms, 39f74ec1)
+
+Tasks: 2 completed
+ Time: 96ms
+
+
+========================================================================
+Step E — Modify stripped package (emitted JS changes), rebuild all
+========================================================================
+
+> moon@ build /Users/pcvera/dev/task-runner-comparison/moon
+> moon run :build
+
+▮▮▮▮ stripped:build (9b0da22b)
+▮▮▮▮ stripped:build (26ms, 9b0da22b)
+▮▮▮▮ sample:build (71236bc7)
+▮▮▮▮ sample:build (24ms, 71236bc7)
+
+Tasks: 2 completed
+ Time: 94ms
+
