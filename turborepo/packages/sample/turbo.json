@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**/*.json", "scripts/**/*.cjs", "../stripped/build/stripped-comments/**"],
+      "inputs": ["src/**/*.json", "scripts/**/*.cjs"],
       "outputs": ["dist/**"]
     }
   }

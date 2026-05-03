@@ -1,0 +1,126 @@
+
+========================================================================
+Reset (pnpm run reset)
+========================================================================
+
+> turborepo@ reset /Users/pcvera/dev/task-runner-comparison/turborepo
+> (pnpm exec turbo daemon stop || true) && rm -rf .turbo packages/stripped/.turbo packages/sample/.turbo packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist
+
+✓ stopped daemon
+• turbo 2.9.7
+
+========================================================================
+Step A — Build all packages
+========================================================================
+
+> turborepo@ build /Users/pcvera/dev/task-runner-comparison/turborepo
+> turbo run build
+
+
+   • Packages in scope: @repo/sample, @repo/stripped
+   • Running build in 2 packages
+   • Remote caching disabled
+
+@repo/stripped:build: cache miss, executing 334fba4c4eb3d9d4
+@repo/stripped:build: 
+@repo/stripped:build: > @repo/stripped@0.0.0 build /Users/pcvera/dev/task-runner-comparison/turborepo/packages/stripped
+@repo/stripped:build: > node scripts/strip-comments.cjs
+@repo/stripped:build: 
+@repo/sample:build: cache miss, executing 113a85f09da02a5d
+@repo/sample:build: 
+@repo/sample:build: > @repo/sample@0.0.0 build /Users/pcvera/dev/task-runner-comparison/turborepo/packages/sample
+@repo/sample:build: > node scripts/dummy-build.cjs
+@repo/sample:build: 
+
+ Tasks:    2 successful, 2 total
+Cached:    0 cached, 2 total
+  Time:    473ms 
+
+• turbo 2.9.7
+
+========================================================================
+Step B — Modify sample package source, rebuild all
+========================================================================
+
+> turborepo@ build /Users/pcvera/dev/task-runner-comparison/turborepo
+> turbo run build
+
+
+   • Packages in scope: @repo/sample, @repo/stripped
+   • Running build in 2 packages
+   • Remote caching disabled
+
+@repo/stripped:build: cache hit, replaying logs 334fba4c4eb3d9d4
+@repo/stripped:build: 
+@repo/stripped:build: > @repo/stripped@0.0.0 build /Users/pcvera/dev/task-runner-comparison/turborepo/packages/stripped
+@repo/stripped:build: > node scripts/strip-comments.cjs
+@repo/stripped:build: 
+@repo/sample:build: cache miss, executing 46c9e82a798231ff
+@repo/sample:build: 
+@repo/sample:build: > @repo/sample@0.0.0 build /Users/pcvera/dev/task-runner-comparison/turborepo/packages/sample
+@repo/sample:build: > node scripts/dummy-build.cjs
+@repo/sample:build: 
+
+ Tasks:    2 successful, 2 total
+Cached:    1 cached, 2 total
+  Time:    236ms 
+
+• turbo 2.9.7
+
+========================================================================
+Step C — Restore sample package, rebuild all
+========================================================================
+
+> turborepo@ build /Users/pcvera/dev/task-runner-comparison/turborepo
+> turbo run build
+
+
+   • Packages in scope: @repo/sample, @repo/stripped
+   • Running build in 2 packages
+   • Remote caching disabled
+
+@repo/stripped:build: cache hit, replaying logs 334fba4c4eb3d9d4
+@repo/stripped:build: 
+@repo/stripped:build: > @repo/stripped@0.0.0 build /Users/pcvera/dev/task-runner-comparison/turborepo/packages/stripped
+@repo/stripped:build: > node scripts/strip-comments.cjs
+@repo/stripped:build: 
+@repo/sample:build: cache hit, replaying logs 113a85f09da02a5d
+@repo/sample:build: 
+@repo/sample:build: > @repo/sample@0.0.0 build /Users/pcvera/dev/task-runner-comparison/turborepo/packages/sample
+@repo/sample:build: > node scripts/dummy-build.cjs
+@repo/sample:build: 
+
+ Tasks:    2 successful, 2 total
+Cached:    2 cached, 2 total
+  Time:    8ms >>> FULL TURBO
+
+• turbo 2.9.7
+
+========================================================================
+Step D — Modify stripped package (comment-only; same emitted JS), rebuild all
+========================================================================
+
+> turborepo@ build /Users/pcvera/dev/task-runner-comparison/turborepo
+> turbo run build
+
+
+   • Packages in scope: @repo/sample, @repo/stripped
+   • Running build in 2 packages
+   • Remote caching disabled
+
+@repo/stripped:build: cache miss, executing 23765d38965d5fe2
+@repo/stripped:build: 
+@repo/stripped:build: > @repo/stripped@0.0.0 build /Users/pcvera/dev/task-runner-comparison/turborepo/packages/stripped
+@repo/stripped:build: > node scripts/strip-comments.cjs
+@repo/stripped:build: 
+@repo/sample:build: cache miss, executing f662babf68ebbc45
+@repo/sample:build: 
+@repo/sample:build: > @repo/sample@0.0.0 build /Users/pcvera/dev/task-runner-comparison/turborepo/packages/sample
+@repo/sample:build: > node scripts/dummy-build.cjs
+@repo/sample:build: 
+
+ Tasks:    2 successful, 2 total
+Cached:    0 cached, 2 total
+  Time:    464ms 
+
+• turbo 2.9.7
