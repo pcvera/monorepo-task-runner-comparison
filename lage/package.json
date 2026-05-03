@@ -2,7 +2,8 @@
   "name": "lage",
   "private": true,
   "scripts": {
-    "build": "lage build"
+    "build": "lage build",
+    "reset": "pnpm exec lage cache --clear && rm -rf node_modules/.cache/backfill packages/stripped/node_modules/.cache/backfill packages/sample/node_modules/.cache/backfill packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist"
   },
   "devDependencies": {
     "lage": "^2.15.12"
