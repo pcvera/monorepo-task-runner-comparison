@@ -18,12 +18,18 @@ My test is:
 
 Observing what is built and what is replayed from cache at each step.
 
-# Results
-
-Most of the task runners I tested rebuilt the `sample` package, even though the built version of the `stripped` package didn't change. The terminal output for each task runner is available in each folder's `terminal-output.txt` file.
+# Results & Analysis
 
 | Test | lage | moon | nx | turborepo | vite-plus | wireit |
 |------|------|------|------|------|------|------|
 | Replay Unchanged Package | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Replay N-1st Build | ✅ | ✅  | ✅ | ✅ | ❌ | ✅ |
 | Cache Unchanged Dependant | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ |
+
+Most of the task runners I tested rebuilt the `sample` package, even though the built version of the `stripped` package didn't change, I think this corresponds to whether the task runner calculates the input hashes before the entire task tree is run, or just before each task is run, and whether they consider a task having changed inputs to be an indicator that downstream builds should be invalidated. I was expecting there to be higher variance in the results here.
+
+I'm surprised to find that the only runners that did were NX and Vite Plus, the latter of which seems to have a problem replaying a build that wasn't the most recent build. I've sort of shied away from NX historically because it's configuration felt a little too unfamiliar, but maybe that's a tradeoff for this type of correctness.
+
+The terminal output for each task runner is available in each folder's `terminal-output.txt` file.
+
+Feel free to reach out if you've spotted any flaws with configuration, or if there's another technology I'm missing out on.
