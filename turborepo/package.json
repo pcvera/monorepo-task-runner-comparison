@@ -2,7 +2,8 @@
   "name": "turborepo",
   "private": true,
   "scripts": {
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "reset": "(pnpm exec turbo daemon stop || true) && rm -rf .turbo packages/stripped/.turbo packages/sample/.turbo packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist"
   },
   "devDependencies": {
     "turbo": "^2.9.7"

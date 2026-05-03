@@ -2,7 +2,8 @@
   "name": "wireit",
   "private": true,
   "scripts": {
-    "build": "wireit"
+    "build": "wireit",
+    "reset": "rm -rf .wireit packages/stripped/.wireit packages/sample/.wireit node_modules/.wireit packages/stripped/node_modules/.wireit packages/sample/node_modules/.wireit packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist"
   },
   "devDependencies": {
     "wireit": "^0.14.12"

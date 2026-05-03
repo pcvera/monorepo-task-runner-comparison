@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "nx run-many -t build --projects=stripped,sample"
+    "build": "nx run-many -t build --projects=stripped,sample",
+    "reset": "nx reset && rm -rf packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist"
   },
   "private": true,
   "dependencies": {},

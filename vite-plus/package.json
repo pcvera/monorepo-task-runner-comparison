@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vp run -r build"
+    "build": "vp run -r build",
+    "reset": "pnpm exec vp cache clean && rm -rf node_modules/.vite packages/stripped/node_modules/.vite packages/sample/node_modules/.vite packages/stripped/build packages/stripped/dist packages/sample/build packages/sample/dist"
   },
   "devDependencies": {
     "vite-plus": "catalog:"
