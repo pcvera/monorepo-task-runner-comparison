@@ -6,7 +6,6 @@
  * 3. Undo sample modification, rebuild
  * 4. Modify stripped package (comment-only; same emitted JS), rebuild
  * 5. Modify stripped package so emitted JS changes, rebuild
- * 6. Restore stripped source, rebuild
  *
  * Usage: node run-methodology.mjs [--no-reset] <folder>
  * Writes combined output to <folder>/terminal-output.txt
@@ -188,9 +187,6 @@ function main() {
     } finally {
       writeFileSync(strippedPath, strippedForOutputStep, "utf8");
     }
-
-    emit(section("Step F — Restore stripped package source, rebuild all"));
-    emit(runPnpm(root, "build"));
 
     const outPath = resolve(root, "terminal-output.txt");
     writeFileSync(outPath, log, "utf8");
