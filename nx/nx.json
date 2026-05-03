@@ -5,10 +5,7 @@
     "production": ["default"],
     "sharedGlobals": [],
     "stripCommentsSources": ["{projectRoot}/src/**/*.js"],
-    "buildOnlySources": ["{projectRoot}/src/build-only.json"],
-    "upstreamStrippedOutput": [
-      "{workspaceRoot}/packages/stripped/build/stripped-comments/**"
-    ]
+    "buildOnlySources": ["{projectRoot}/src/**/*.json"]
   },
   "neverConnectToCloud": true,
   "analytics": false,

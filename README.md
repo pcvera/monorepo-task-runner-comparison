@@ -15,6 +15,8 @@ My test is:
 0. Modify the source of the `sample` package and rebuild all packages (cache replay the unchanged dependant)
 0. Undo that modification and rebuild all packages (cache replay the previous builds)
 0. Modify the source of the `stripped` package in a way that doesn't change the output and rebuild all packages (cache replay the unchanged dependant)
+0. Modify the source of the `stripped` package in a way that **does** change the emitted JavaScript and rebuild all packages
+0. Restore that modification and rebuild all packages
 
 Observing what is built and what is replayed from cache at each step.
 

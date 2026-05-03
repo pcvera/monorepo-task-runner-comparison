@@ -4,7 +4,9 @@
  * 1. Build all packages
  * 2. Modify sample package source, rebuild
  * 3. Undo sample modification, rebuild
- * 4. Modify stripped package (comment-only), rebuild
+ * 4. Modify stripped package (comment-only; same emitted JS), rebuild
+ * 5. Modify stripped package so emitted JS changes, rebuild
+ * 6. Restore stripped source, rebuild
  *
  * Usage: node run-methodology.mjs [--no-reset] <folder>
  * Writes combined output to <folder>/terminal-output.txt
@@ -24,6 +26,9 @@ const COMMENT_FIND =
   "// This comment will be stripped from the output, modifying it should not trigger a rebuild because of the stripped comments output being the same.";
 const COMMENT_REPLACE =
   "// Methodology-only: different comment text; strip step yields identical emitted JS.";
+
+const OUTPUT_CHANGE_FIND = `return "sampleInput";`;
+const OUTPUT_CHANGE_REPLACE = `return "sampleInputModified";`;
 
 function parseArgs(argv) {
   let noReset = false;
@@ -100,6 +105,11 @@ function validateFixture(root) {
       `stripped source comment anchor not found; expected line containing:\n${COMMENT_FIND}`,
     );
   }
+  if (!stripped.includes(OUTPUT_CHANGE_FIND)) {
+    throw new Error(
+      `stripped source output anchor not found; expected line containing:\n${OUTPUT_CHANGE_FIND}`,
+    );
+  }
 }
 
 function main() {
@@ -162,6 +172,25 @@ function main() {
     } finally {
       writeFileSync(strippedPath, strippedOriginal, "utf8");
     }
+
+    const strippedForOutputStep = readFileSync(strippedPath, "utf8");
+    if (!strippedForOutputStep.includes(OUTPUT_CHANGE_FIND)) {
+      throw new Error("stripped file missing output anchor before Step E");
+    }
+    writeFileSync(
+      strippedPath,
+      strippedForOutputStep.replace(OUTPUT_CHANGE_FIND, OUTPUT_CHANGE_REPLACE),
+      "utf8",
+    );
+    try {
+      emit(section("Step E — Modify stripped package (emitted JS changes), rebuild all"));
+      emit(runPnpm(root, "build"));
+    } finally {
+      writeFileSync(strippedPath, strippedForOutputStep, "utf8");
+    }
+
+    emit(section("Step F — Restore stripped package source, rebuild all"));
+    emit(runPnpm(root, "build"));
 
     const outPath = resolve(root, "terminal-output.txt");
     writeFileSync(outPath, log, "utf8");

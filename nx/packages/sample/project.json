@@ -11,11 +11,7 @@
         "command": "node scripts/dummy-build.cjs",
         "cwd": "{projectRoot}"
       },
-      "inputs": [
-        "upstreamStrippedOutput",
-        "buildOnlySources",
-        "{projectRoot}/scripts/**/*.cjs"
-      ],
+      "inputs": ["buildOnlySources", "{projectRoot}/scripts/**/*.cjs"],
       "outputs": ["{projectRoot}/dist"]
     }
   },

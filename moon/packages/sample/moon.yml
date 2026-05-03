@@ -9,8 +9,7 @@ tasks:
     deps:
       - "stripped:build"
     inputs:
-      - "/packages/stripped/build/stripped-comments/**"
-      - "src/build-only.json"
+      - "src/**/*.json"
       - "scripts/**/*.cjs"
     outputs:
       - "dist"

@@ -10,11 +10,7 @@ const config = {
     },
     "@repo/sample#build": {
       dependsOn: ["@repo/stripped#build"],
-      inputs: [
-        "src/**/*.json",
-        "scripts/**/*.cjs",
-        "../stripped/build/stripped-comments/**",
-      ],
+      inputs: ["src/**/*.json", "scripts/**/*.cjs"],
       outputs: ["dist/**"],
     },
   },
